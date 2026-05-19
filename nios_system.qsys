@@ -16,7 +16,7 @@
    {
       datum _sortIndex
       {
-         value = "4";
+         value = "5";
          type = "int";
       }
    }
@@ -24,7 +24,7 @@
    {
       datum _sortIndex
       {
-         value = "7";
+         value = "8";
          type = "int";
       }
    }
@@ -79,7 +79,7 @@
    {
       datum _sortIndex
       {
-         value = "5";
+         value = "6";
          type = "int";
       }
    }
@@ -87,7 +87,7 @@
    {
       datum _sortIndex
       {
-         value = "1";
+         value = "2";
          type = "int";
       }
    }
@@ -95,11 +95,11 @@
    {
       datum _sortIndex
       {
-         value = "2";
+         value = "3";
          type = "int";
       }
    }
-   element switches.s1
+   element sdram.s1
    {
       datum _lockedAddress
       {
@@ -108,20 +108,7 @@
       }
       datum baseAddress
       {
-         value = "12304";
-         type = "String";
-      }
-   }
-   element LEDs.s1
-   {
-      datum _lockedAddress
-      {
-         value = "1";
-         type = "boolean";
-      }
-      datum baseAddress
-      {
-         value = "12288";
+         value = "67108864";
          type = "String";
       }
    }
@@ -138,7 +125,7 @@
          type = "String";
       }
    }
-   element sdram.s1
+   element LEDs.s1
    {
       datum _lockedAddress
       {
@@ -147,7 +134,20 @@
       }
       datum baseAddress
       {
-         value = "67108864";
+         value = "12288";
+         type = "String";
+      }
+   }
+   element switches.s1
+   {
+      datum _lockedAddress
+      {
+         value = "1";
+         type = "boolean";
+      }
+      datum baseAddress
+      {
+         value = "12304";
          type = "String";
       }
    }
@@ -155,7 +155,7 @@
    {
       datum _sortIndex
       {
-         value = "6";
+         value = "7";
          type = "int";
       }
    }
@@ -163,7 +163,15 @@
    {
       datum _sortIndex
       {
-         value = "3";
+         value = "4";
+         type = "int";
+      }
+   }
+   element up_clocks_0
+   {
+      datum _sortIndex
+      {
+         value = "1";
          type = "int";
       }
    }
@@ -182,7 +190,7 @@
  <parameter name="projectName" value="lights.qpf" />
  <parameter name="sopcBorderPoints" value="false" />
  <parameter name="systemHash" value="1" />
- <parameter name="timeStamp" value="1779097753384" />
+ <parameter name="timeStamp" value="1779173703123" />
  <parameter name="useTestBenchNamingPattern" value="false" />
  <instanceScript></instanceScript>
  <interface name="reset" internal="clk_0.clk_in_reset" type="reset" dir="end" />
@@ -461,6 +469,16 @@
    name="PWM_avalon_interface_0">
   <parameter name="AUTO_CLOCK_SINK_CLOCK_RATE" value="50000000" />
  </module>
+ <module kind="altera_up_clocks" version="13.0" enabled="1" name="up_clocks_0">
+  <parameter name="board" value="DE0-Nano" />
+  <parameter name="sys_clk_freq" value="50" />
+  <parameter name="sdram_clk" value="true" />
+  <parameter name="vga_clk" value="false" />
+  <parameter name="audio_clk" value="true" />
+  <parameter name="audio_clk_freq" value="12.288" />
+  <parameter name="AUTO_CLK_IN_PRIMARY_CLOCK_RATE" value="50000000" />
+  <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone IV E" />
+ </module>
  <connection
    kind="avalon"
    version="13.0"
@@ -630,6 +648,21 @@
  <connection kind="clock" version="13.0" start="clk_0.clk" end="switches.clk" />
  <connection kind="clock" version="13.0" start="clk_0.clk" end="LEDs.clk" />
  <connection kind="clock" version="13.0" start="clk_0.clk" end="jtag_uart.clk" />
+ <connection
+   kind="clock"
+   version="13.0"
+   start="clk_0.clk"
+   end="up_clocks_0.clk_in_primary" />
+ <connection
+   kind="reset"
+   version="13.0"
+   start="clk_0.clk_reset"
+   end="up_clocks_0.clk_in_primary_reset" />
+ <connection
+   kind="reset"
+   version="13.0"
+   start="nios2_qsys_0.jtag_debug_module_reset"
+   end="up_clocks_0.clk_in_primary_reset" />
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
  <interconnectRequirement for="$system" name="qsys_mm.maxAdditionalLatency" value="1" />
 </system>
