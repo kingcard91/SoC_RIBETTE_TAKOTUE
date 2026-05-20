@@ -9,29 +9,31 @@ ENTITY lights IS
         LED      : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
 
         -- SDRAM
-        DRAM_CLK   : OUT STD_LOGIC;
-        DRAM_CKE   : OUT STD_LOGIC;
-        DRAM_ADDR  : OUT STD_LOGIC_VECTOR(12 DOWNTO 0);
-        DRAM_BA    : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
-        DRAM_CS_N  : OUT STD_LOGIC;
-        DRAM_CAS_N : OUT STD_LOGIC;
-        DRAM_RAS_N : OUT STD_LOGIC;
-        DRAM_WE_N  : OUT STD_LOGIC;
+        DRAM_CLK   : OUT   STD_LOGIC;
+        DRAM_CKE   : OUT   STD_LOGIC;
+        DRAM_ADDR  : OUT   STD_LOGIC_VECTOR(12 DOWNTO 0);
+        DRAM_BA    : OUT   STD_LOGIC_VECTOR(1 DOWNTO 0);
+        DRAM_CS_N  : OUT   STD_LOGIC;
+        DRAM_CAS_N : OUT   STD_LOGIC;
+        DRAM_RAS_N : OUT   STD_LOGIC;
+        DRAM_WE_N  : OUT   STD_LOGIC;
         DRAM_DQ    : INOUT STD_LOGIC_VECTOR(15 DOWNTO 0);
-        DRAM_DQM   : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
+        DRAM_DQM   : OUT   STD_LOGIC_VECTOR(1 DOWNTO 0);
 
-        -- Moteurs
-        MTRR_N : OUT STD_LOGIC;
+        -- Moteurs CuteCar
         MTRR_P : OUT STD_LOGIC;
+        MTRR_N : OUT STD_LOGIC;
         MTRL_P : OUT STD_LOGIC;
         MTRL_N : OUT STD_LOGIC;
 
         MTR_Sleep_n : OUT STD_LOGIC;
         MTR_Fault_n : IN  STD_LOGIC;
 
-        -- ADC selon ton port map actuel
+        -- ADC / capteurs sol
+        ADC_CLK    : OUT STD_LOGIC;
+        ADC_SDO    : IN  STD_LOGIC;
         ADC_CONVST : OUT STD_LOGIC;
-        ADC_SCK    : IN  STD_LOGIC
+        ADC_SDI    : OUT STD_LOGIC
     );
 END lights;
 
@@ -59,8 +61,10 @@ ARCHITECTURE rtl OF lights IS
             dc_motor_p_l_export : OUT   STD_LOGIC;
             dc_motor_n_l_export : OUT   STD_LOGIC;
 
+            adc_clk_export      : OUT   STD_LOGIC;
+            adc_sdo_export      : IN    STD_LOGIC;
             adc_convst_export   : OUT   STD_LOGIC;
-            adc_sck_export      : IN    STD_LOGIC
+            adc_sdi_export      : OUT   STD_LOGIC
         );
     END COMPONENT;
 
@@ -88,12 +92,16 @@ BEGIN
             dc_motor_p_l_export => MTRL_P,
             dc_motor_n_l_export => MTRL_N,
 
+            adc_clk_export      => ADC_CLK,
+            adc_sdo_export      => ADC_SDO,
             adc_convst_export   => ADC_CONVST,
-            adc_sck_export      => ADC_SCK
+            adc_sdi_export      => ADC_SDI
         );
 
+    -- SDRAM clock simple
     DRAM_CLK <= CLOCK_50;
 
+    -- Activation driver moteur
     MTR_Sleep_n <= '1';
 
 END rtl;
