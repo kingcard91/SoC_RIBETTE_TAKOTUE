@@ -25,6 +25,10 @@ END lights;
 
 ARCHITECTURE rtl OF lights IS
 
+    -- Signals internes
+    SIGNAL reset_n_i           : STD_LOGIC;
+    SIGNAL byte_shuffler_mode  : STD_LOGIC;
+
     -- Déclaration du composant Nios II
     COMPONENT nios_system IS
         PORT (
@@ -45,26 +49,23 @@ ARCHITECTURE rtl OF lights IS
         );
     END COMPONENT;
 
-    -- Déclaration du composant Byte Shuffler (inversion octets)
+    -- Déclaration du composant Byte Shuffler (inversion d’octets)
     COMPONENT byte_shuffler IS
         PORT (
-            clk       : IN  STD_LOGIC;
-            reset_n   : IN  STD_LOGIC;
-            chipselect: IN  STD_LOGIC;
-            write     : IN  STD_LOGIC;
-            writedata : IN  STD_LOGIC_VECTOR(31 DOWNTO 0);
-            read      : IN  STD_LOGIC;
-            readdata  : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-            address   : IN  STD_LOGIC_VECTOR(1 DOWNTO 0)
+            clk        : IN  STD_LOGIC;
+            reset_n    : IN  STD_LOGIC;
+            chipselect : IN  STD_LOGIC;
+            write      : IN  STD_LOGIC;
+            writedata  : IN  STD_LOGIC_VECTOR(31 DOWNTO 0);
+            read       : IN  STD_LOGIC;
+            readdata   : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+            address    : IN  STD_LOGIC_VECTOR(1 DOWNTO 0)
         );
     END COMPONENT;
 
-    -- Signaux internes
-    SIGNAL reset_n_i : STD_LOGIC;
-
 BEGIN
 
-    -- Simple reset actif sur KEY(0)
+    -- Reset simple basé sur KEY(0)
     PROCESS(CLOCK_50)
     BEGIN
         IF rising_edge(CLOCK_50) THEN
@@ -72,7 +73,10 @@ BEGIN
         END IF;
     END PROCESS;
 
-    -- Instance du Nios II
+    -- Mode sélectionnable via SW0
+    byte_shuffler_mode <= SW(0);
+
+    -- Instance Nios II
     u0 : nios_system
         PORT MAP (
             reset_reset_n    => reset_n_i,
@@ -90,20 +94,20 @@ BEGIN
             sdram_wire_we_n  => DRAM_WE_N
         );
 
-    -- Instance du Byte Shuffler
+    -- Instance Byte Shuffler
     byte_shuffle_inst : byte_shuffler
         PORT MAP (
             clk        => CLOCK_50,
             reset_n    => reset_n_i,
-            chipselect => '1',  -- toujours sélectionné pour test
-            write      => '0',  -- mettre à 1 via Nios II pour écrire
-            read       => '0',  -- mettre à 1 via Nios II pour lire
+            chipselect => '1',
+            write      => '0',                -- piloté depuis Nios II via Avalon-MM
+            read       => '0',                -- piloté depuis Nios II
             writedata  => (others => '0'),
             readdata   => open,
-            address    => "00"
+            address    => (0 => byte_shuffler_mode, 1 => '0') -- adresse 0 ou 1 selon le mode
         );
 
-    -- SDRAM Clock directe
+    -- SDRAM cadencé sur l’horloge principale
     DRAM_CLK <= CLOCK_50;
 
 END rtl;
