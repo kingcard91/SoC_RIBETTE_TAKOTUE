@@ -15,7 +15,7 @@
   </columns>
  </clocktable>
  <library
-   expandedCategories="Library/Memories and Memory Controllers/On-Chip,Library/Qsys Interconnect,Library/DSP,Library/Bridges/Memory-Mapped,Project/My Own IP Cores,Library/Interface Protocols/Ethernet,Library/Interface Protocols/SDI,Library/Qsys Interconnect/Interrupt,Library,Library/University Program/Audio &amp; Video/Video,Library/Verification/Simulation,Library/Clock and Reset,Library/Bridges,Library/DSP/Video and Image Processing,Library/Interface Protocols,Library/Interface Protocols/Ethernet/Submodules,Library/University Program/Audio &amp; Video,Library/Verification,Project,Library/University Program,Library/Memories and Memory Controllers" />
+   expandedCategories="Library/Memories and Memory Controllers/On-Chip,Library/University Program/Audio &amp; Video/Video,Library/Bridges/Memory-Mapped,Library/DSP/Video and Image Processing,Library/Qsys Interconnect,Library,Library/Interface Protocols,Library/Clock and Reset,Project,Library/Interface Protocols/Ethernet,Project/My Own IP Cores,Library/Interface Protocols/Ethernet/Submodules,Library/Memories and Memory Controllers,Library/Verification,Library/DSP,Library/Interface Protocols/SDI,Library/Bridges,Library/University Program,Library/Verification/Simulation,Library/Qsys Interconnect/Interrupt,Library/University Program/Audio &amp; Video" />
  <window width="1600" height="938" x="105" y="27" />
  <generation synthesis="VHDL" />
  <hdlexample language="VHDL" />
