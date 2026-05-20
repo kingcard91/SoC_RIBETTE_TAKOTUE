@@ -20,14 +20,6 @@
          type = "int";
       }
    }
-   element PWM_avalon_interface_0
-   {
-      datum _sortIndex
-      {
-         value = "8";
-         type = "int";
-      }
-   }
    element jtag_uart.avalon_jtag_slave
    {
       datum _lockedAddress
@@ -41,24 +33,19 @@
          type = "String";
       }
    }
-   element PWM_avalon_interface_0.avalon_slave_0
+   element byte_shuffler_1.avalon_slave_0
    {
-      datum _lockedAddress
-      {
-         value = "1";
-         type = "boolean";
-      }
       datum baseAddress
       {
-         value = "32";
+         value = "0";
          type = "String";
       }
    }
-   element capteurs_sol_read_avalon_interface_1
+   element byte_shuffler_1
    {
       datum _sortIndex
       {
-         value = "9";
+         value = "8";
          type = "int";
       }
    }
@@ -107,32 +94,6 @@
          type = "int";
       }
    }
-   element LEDs.s1
-   {
-      datum _lockedAddress
-      {
-         value = "1";
-         type = "boolean";
-      }
-      datum baseAddress
-      {
-         value = "12288";
-         type = "String";
-      }
-   }
-   element onchip_memory.s1
-   {
-      datum _lockedAddress
-      {
-         value = "1";
-         type = "boolean";
-      }
-      datum baseAddress
-      {
-         value = "4096";
-         type = "String";
-      }
-   }
    element sdram.s1
    {
       datum _lockedAddress
@@ -156,6 +117,32 @@
       datum baseAddress
       {
          value = "12304";
+         type = "String";
+      }
+   }
+   element LEDs.s1
+   {
+      datum _lockedAddress
+      {
+         value = "1";
+         type = "boolean";
+      }
+      datum baseAddress
+      {
+         value = "12288";
+         type = "String";
+      }
+   }
+   element onchip_memory.s1
+   {
+      datum _lockedAddress
+      {
+         value = "1";
+         type = "boolean";
+      }
+      datum baseAddress
+      {
+         value = "4096";
          type = "String";
       }
    }
@@ -198,7 +185,7 @@
  <parameter name="projectName" value="lights.qpf" />
  <parameter name="sopcBorderPoints" value="false" />
  <parameter name="systemHash" value="1" />
- <parameter name="timeStamp" value="1779283086877" />
+ <parameter name="timeStamp" value="1779288396509" />
  <parameter name="useTestBenchNamingPattern" value="false" />
  <instanceScript></instanceScript>
  <interface name="reset" internal="clk_0.clk_in_reset" type="reset" dir="end" />
@@ -214,46 +201,6 @@
    dir="end" />
  <interface name="clk" internal="clk_0.clk_in" type="clock" dir="end" />
  <interface name="sdram_wire" internal="sdram.wire" type="conduit" dir="end" />
- <interface
-   name="dc_motor_p_r"
-   internal="PWM_avalon_interface_0.conduit_end_1"
-   type="conduit"
-   dir="end" />
- <interface
-   name="dc_motor_n_r"
-   internal="PWM_avalon_interface_0.conduit_end_2"
-   type="conduit"
-   dir="end" />
- <interface
-   name="dc_motor_p_l"
-   internal="PWM_avalon_interface_0.conduit_end_3"
-   type="conduit"
-   dir="end" />
- <interface
-   name="dc_motor_n_l"
-   internal="PWM_avalon_interface_0.conduit_end_4"
-   type="conduit"
-   dir="end" />
- <interface
-   name="adc_clk"
-   internal="capteurs_sol_read_avalon_interface_1.conduit_end"
-   type="conduit"
-   dir="end" />
- <interface
-   name="adc_sdo"
-   internal="capteurs_sol_read_avalon_interface_1.conduit_end_1"
-   type="conduit"
-   dir="end" />
- <interface
-   name="adc_convst"
-   internal="capteurs_sol_read_avalon_interface_1.conduit_end_2"
-   type="conduit"
-   dir="end" />
- <interface
-   name="adc_sdi"
-   internal="capteurs_sol_read_avalon_interface_1.conduit_end_3"
-   type="conduit"
-   dir="end" />
  <module kind="clock_source" version="13.0" enabled="1" name="clk_0">
   <parameter name="clockFrequency" value="50000000" />
   <parameter name="clockFrequencyKnown" value="true" />
@@ -366,7 +313,7 @@
   <parameter name="tightlyCoupledInstructionMaster2AddrWidth" value="1" />
   <parameter name="tightlyCoupledInstructionMaster3AddrWidth" value="1" />
   <parameter name="instSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory.s1' start='0x1000' end='0x2000' /><slave name='nios2_qsys_0.jtag_debug_module' start='0x2800' end='0x3000' /><slave name='sdram.s1' start='0x4000000' end='0x6000000' /></address-map>]]></parameter>
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='capteurs_sol_read_avalon_interface_1.avalon_slave_0' start='0x0' end='0x10' /><slave name='PWM_avalon_interface_0.avalon_slave_0' start='0x20' end='0x24' /><slave name='onchip_memory.s1' start='0x1000' end='0x2000' /><slave name='nios2_qsys_0.jtag_debug_module' start='0x2800' end='0x3000' /><slave name='LEDs.s1' start='0x3000' end='0x3010' /><slave name='switches.s1' start='0x3010' end='0x3020' /><slave name='jtag_uart.avalon_jtag_slave' start='0x3020' end='0x3028' /><slave name='sdram.s1' start='0x4000000' end='0x6000000' /></address-map>]]></parameter>
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='byte_shuffler_1.avalon_slave_0' start='0x0' end='0x10' /><slave name='onchip_memory.s1' start='0x1000' end='0x2000' /><slave name='nios2_qsys_0.jtag_debug_module' start='0x2800' end='0x3000' /><slave name='LEDs.s1' start='0x3000' end='0x3010' /><slave name='switches.s1' start='0x3010' end='0x3020' /><slave name='jtag_uart.avalon_jtag_slave' start='0x3020' end='0x3028' /><slave name='sdram.s1' start='0x4000000' end='0x6000000' /></address-map>]]></parameter>
   <parameter name="clockFrequency" value="50000000" />
   <parameter name="deviceFamilyName" value="Cyclone IV E" />
   <parameter name="internalIrqMaskSystemInfo" value="32" />
@@ -490,13 +437,6 @@
   <parameter name="clockRate" value="50000000" />
   <parameter name="componentName" value="$${FILENAME}_sdram" />
  </module>
- <module
-   kind="PWM_avalon_interface"
-   version="1.0"
-   enabled="1"
-   name="PWM_avalon_interface_0">
-  <parameter name="AUTO_CLOCK_SINK_CLOCK_RATE" value="50000000" />
- </module>
  <module kind="altera_up_clocks" version="13.0" enabled="1" name="up_clocks_0">
   <parameter name="board" value="DE0-Nano" />
   <parameter name="sys_clk_freq" value="50" />
@@ -507,11 +447,9 @@
   <parameter name="AUTO_CLK_IN_PRIMARY_CLOCK_RATE" value="50000000" />
   <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone IV E" />
  </module>
- <module
-   kind="capteurs_sol_read_avalon_interface"
-   version="1.0"
-   enabled="1"
-   name="capteurs_sol_read_avalon_interface_1" />
+ <module kind="byte_shuffler" version="1.0" enabled="1" name="byte_shuffler_1">
+  <parameter name="AUTO_CLOCK_SINK_CLOCK_RATE" value="50000000" />
+ </module>
  <connection
    kind="avalon"
    version="13.0"
@@ -653,25 +591,6 @@
    version="13.0"
    start="nios2_qsys_0.jtag_debug_module_reset"
    end="sdram.reset" />
- <connection
-   kind="clock"
-   version="13.0"
-   start="clk_0.clk"
-   end="PWM_avalon_interface_0.clock_sink" />
- <connection
-   kind="reset"
-   version="13.0"
-   start="nios2_qsys_0.jtag_debug_module_reset"
-   end="PWM_avalon_interface_0.reset_sink" />
- <connection
-   kind="avalon"
-   version="13.0"
-   start="nios2_qsys_0.data_master"
-   end="PWM_avalon_interface_0.avalon_slave_0">
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0020" />
-  <parameter name="defaultConnection" value="false" />
- </connection>
  <connection kind="clock" version="13.0" start="clk_0.clk" end="nios2_qsys_0.clk" />
  <connection
    kind="clock"
@@ -697,24 +616,24 @@
    start="nios2_qsys_0.jtag_debug_module_reset"
    end="up_clocks_0.clk_in_primary_reset" />
  <connection
+   kind="clock"
+   version="13.0"
+   start="clk_0.clk"
+   end="byte_shuffler_1.clock_sink" />
+ <connection
+   kind="reset"
+   version="13.0"
+   start="clk_0.clk_reset"
+   end="byte_shuffler_1.reset_sink" />
+ <connection
    kind="avalon"
    version="13.0"
    start="nios2_qsys_0.data_master"
-   end="capteurs_sol_read_avalon_interface_1.avalon_slave_0">
+   end="byte_shuffler_1.avalon_slave_0">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x0000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
- <connection
-   kind="reset"
-   version="13.0"
-   start="nios2_qsys_0.jtag_debug_module_reset"
-   end="capteurs_sol_read_avalon_interface_1.reset_sink" />
- <connection
-   kind="clock"
-   version="13.0"
-   start="clk_0.clk"
-   end="capteurs_sol_read_avalon_interface_1.clock_sink" />
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
  <interconnectRequirement for="$system" name="qsys_mm.maxAdditionalLatency" value="1" />
 </system>
