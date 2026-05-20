@@ -2,7 +2,7 @@ set_global_assignment -entity "nios_system" -library "nios_system" -name IP_TOOL
 set_global_assignment -entity "nios_system" -library "nios_system" -name IP_TOOL_VERSION "13.0sp1"
 set_global_assignment -entity "nios_system" -library "nios_system" -name IP_TOOL_ENV "Qsys"
 set_global_assignment -library "nios_system" -name SOPCINFO_FILE [file join $::quartus(qip_path) "../../nios_system.sopcinfo"]
-set_instance_assignment -entity "nios_system" -library "nios_system" -name SLD_INFO "QSYS_NAME nios_system HAS_SOPCINFO 1 GENERATION_ID 1779289578"
+set_instance_assignment -entity "nios_system" -library "nios_system" -name SLD_INFO "QSYS_NAME nios_system HAS_SOPCINFO 1 GENERATION_ID 1779290424"
 set_global_assignment -library "nios_system" -name MISC_FILE [file join $::quartus(qip_path) "../../nios_system.cmp"]
 set_global_assignment -name SYNTHESIS_ONLY_QIP ON
 set_global_assignment -library "nios_system" -name MISC_FILE [file join $::quartus(qip_path) "../../nios_system.qsys"]
@@ -23,7 +23,7 @@ set_global_assignment -library "nios_system" -name VHDL_FILE [file join $::quart
 set_global_assignment -library "nios_system" -name VHDL_FILE [file join $::quartus(qip_path) "nios_system_switches_s1_translator.vhd"]
 set_global_assignment -library "nios_system" -name VHDL_FILE [file join $::quartus(qip_path) "nios_system_leds_s1_translator.vhd"]
 set_global_assignment -library "nios_system" -name VHDL_FILE [file join $::quartus(qip_path) "nios_system_jtag_uart_avalon_jtag_slave_translator.vhd"]
-set_global_assignment -library "nios_system" -name VHDL_FILE [file join $::quartus(qip_path) "nios_system_byte_shuffler_0_avalon_slave_0_translator.vhd"]
+set_global_assignment -library "nios_system" -name VHDL_FILE [file join $::quartus(qip_path) "nios_system_byte_shuffler_1_avalon_slave_0_translator.vhd"]
 set_global_assignment -library "nios_system" -name VHDL_FILE [file join $::quartus(qip_path) "nios_system_rst_controller.vhd"]
 set_global_assignment -library "nios_system" -name VHDL_FILE [file join $::quartus(qip_path) "nios_system_rst_controller_001.vhd"]
 set_global_assignment -library "nios_system" -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) "submodules/nios_system_irq_mapper.sv"]

@@ -25,8 +25,10 @@ END lights;
 
 ARCHITECTURE rtl OF lights IS
 
-    -- Signals internes
+    -- Signaux internes
     SIGNAL reset_n_i           : STD_LOGIC;
+
+    -- Signal pour sélectionner le mode de swap
     SIGNAL byte_shuffler_mode  : STD_LOGIC;
 
     -- Déclaration du composant Nios II
@@ -49,7 +51,7 @@ ARCHITECTURE rtl OF lights IS
         );
     END COMPONENT;
 
-    -- Déclaration du composant Byte Shuffler (inversion d’octets)
+    -- Déclaration du composant Byte Shuffler (32 bits)
     COMPONENT byte_shuffler IS
         PORT (
             clk        : IN  STD_LOGIC;
@@ -65,7 +67,7 @@ ARCHITECTURE rtl OF lights IS
 
 BEGIN
 
-    -- Reset simple basé sur KEY(0)
+    -- Reset simple sur KEY(0)
     PROCESS(CLOCK_50)
     BEGIN
         IF rising_edge(CLOCK_50) THEN
@@ -99,12 +101,12 @@ BEGIN
         PORT MAP (
             clk        => CLOCK_50,
             reset_n    => reset_n_i,
-            chipselect => '1',
-            write      => '0',                -- piloté depuis Nios II via Avalon-MM
-            read       => '0',                -- piloté depuis Nios II
-            writedata  => (others => '0'),
-            readdata   => open,
-            address    => (0 => byte_shuffler_mode, 1 => '0') -- adresse 0 ou 1 selon le mode
+            chipselect => '1',               -- Toujours actif pour test
+            write      => '0',               -- Piloté depuis Nios II
+            read       => '0',               -- Piloté depuis Nios II
+            writedata  => (others => '0'),   -- Remplir depuis Nios II
+            readdata   => open,              -- Connecter si tu veux voir le résultat direct
+            address    => (0 => byte_shuffler_mode, 1 => '0') -- Sélection mode
         );
 
     -- SDRAM cadencé sur l’horloge principale

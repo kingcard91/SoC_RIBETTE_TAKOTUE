@@ -33,7 +33,15 @@
          type = "String";
       }
    }
-   element byte_shuffler_0
+   element byte_shuffler_1.avalon_slave_0
+   {
+      datum baseAddress
+      {
+         value = "0";
+         type = "String";
+      }
+   }
+   element byte_shuffler_1
    {
       datum _sortIndex
       {
@@ -112,19 +120,6 @@
          type = "String";
       }
    }
-   element switches.s1
-   {
-      datum _lockedAddress
-      {
-         value = "1";
-         type = "boolean";
-      }
-      datum baseAddress
-      {
-         value = "12304";
-         type = "String";
-      }
-   }
    element LEDs.s1
    {
       datum _lockedAddress
@@ -135,6 +130,19 @@
       datum baseAddress
       {
          value = "12288";
+         type = "String";
+      }
+   }
+   element switches.s1
+   {
+      datum _lockedAddress
+      {
+         value = "1";
+         type = "boolean";
+      }
+      datum baseAddress
+      {
+         value = "12304";
          type = "String";
       }
    }
@@ -177,7 +185,7 @@
  <parameter name="projectName" value="lights.qpf" />
  <parameter name="sopcBorderPoints" value="false" />
  <parameter name="systemHash" value="1" />
- <parameter name="timeStamp" value="1779289493871" />
+ <parameter name="timeStamp" value="1779290337096" />
  <parameter name="useTestBenchNamingPattern" value="false" />
  <instanceScript></instanceScript>
  <interface name="reset" internal="clk_0.clk_in_reset" type="reset" dir="end" />
@@ -305,7 +313,7 @@
   <parameter name="tightlyCoupledInstructionMaster2AddrWidth" value="1" />
   <parameter name="tightlyCoupledInstructionMaster3AddrWidth" value="1" />
   <parameter name="instSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory.s1' start='0x1000' end='0x2000' /><slave name='nios2_qsys_0.jtag_debug_module' start='0x2800' end='0x3000' /><slave name='sdram.s1' start='0x4000000' end='0x6000000' /></address-map>]]></parameter>
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='byte_shuffler_0.avalon_slave_0' start='0x0' end='0x10' /><slave name='onchip_memory.s1' start='0x1000' end='0x2000' /><slave name='nios2_qsys_0.jtag_debug_module' start='0x2800' end='0x3000' /><slave name='LEDs.s1' start='0x3000' end='0x3010' /><slave name='switches.s1' start='0x3010' end='0x3020' /><slave name='jtag_uart.avalon_jtag_slave' start='0x3020' end='0x3028' /><slave name='sdram.s1' start='0x4000000' end='0x6000000' /></address-map>]]></parameter>
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='byte_shuffler_1.avalon_slave_0' start='0x0' end='0x10' /><slave name='onchip_memory.s1' start='0x1000' end='0x2000' /><slave name='nios2_qsys_0.jtag_debug_module' start='0x2800' end='0x3000' /><slave name='LEDs.s1' start='0x3000' end='0x3010' /><slave name='switches.s1' start='0x3010' end='0x3020' /><slave name='jtag_uart.avalon_jtag_slave' start='0x3020' end='0x3028' /><slave name='sdram.s1' start='0x4000000' end='0x6000000' /></address-map>]]></parameter>
   <parameter name="clockFrequency" value="50000000" />
   <parameter name="deviceFamilyName" value="Cyclone IV E" />
   <parameter name="internalIrqMaskSystemInfo" value="32" />
@@ -439,7 +447,7 @@
   <parameter name="AUTO_CLK_IN_PRIMARY_CLOCK_RATE" value="50000000" />
   <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone IV E" />
  </module>
- <module kind="byte_shuffler" version="1.0" enabled="1" name="byte_shuffler_0" />
+ <module kind="byte_shuffler" version="1.0" enabled="1" name="byte_shuffler_1" />
  <connection
    kind="avalon"
    version="13.0"
@@ -609,17 +617,17 @@
    kind="clock"
    version="13.0"
    start="clk_0.clk"
-   end="byte_shuffler_0.clock_sink" />
+   end="byte_shuffler_1.clock_sink" />
  <connection
    kind="reset"
    version="13.0"
    start="clk_0.clk_reset"
-   end="byte_shuffler_0.reset_sink" />
+   end="byte_shuffler_1.reset_sink" />
  <connection
    kind="avalon"
    version="13.0"
    start="nios2_qsys_0.data_master"
-   end="byte_shuffler_0.avalon_slave_0">
+   end="byte_shuffler_1.avalon_slave_0">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x0000" />
   <parameter name="defaultConnection" value="false" />
